@@ -1,4 +1,8 @@
+using DataAccess.Abstract;
 using DataAccess.Entities;
+using DataAccess.Repositories;
+using Domain.Abstract;
+using Domain.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace DirectoryAPI
@@ -11,10 +15,17 @@ namespace DirectoryAPI
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<ICatalogItemRepository, CatalogItemRepository>();
+            builder.Services.AddScoped<ICatalogItemService, CatalogItemService>();
+            builder.Services.AddScoped<ICatalogItemValidator, CatalogItemValidator>();
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));  
 

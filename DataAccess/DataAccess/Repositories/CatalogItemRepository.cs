@@ -24,7 +24,7 @@ namespace DataAccess.Repositories
             if (catalogItems == null)
                 throw new Exception("Catalog items not found");
 
-            return catalogItems;
+            return catalogItems.Where(x => x.ParentId == null);
         }
 
         public async Task<CatalogItem> GetByIdAsync(int id)

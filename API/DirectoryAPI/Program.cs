@@ -1,6 +1,7 @@
 using DataAccess.Abstract;
 using DataAccess.Entities;
 using DataAccess.Repositories;
+using DirectoryAPI.Profiles;
 using Domain.Abstract;
 using Domain.Services;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace DirectoryAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
             builder.Services.AddScoped<ICatalogItemRepository, CatalogItemRepository>();
             builder.Services.AddScoped<ICatalogItemService, CatalogItemService>();
             builder.Services.AddScoped<ICatalogItemValidator, CatalogItemValidator>();

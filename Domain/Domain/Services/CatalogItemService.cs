@@ -35,16 +35,18 @@ namespace Domain.Services
         {
             _catalogItemValidator.Validate(catalogItem);
 
-            var existingCatalogItem = await _catalogItemRepository.GetByNameAsync(catalogItem.Name);
-            if (existingCatalogItem != null)
-                throw new InvalidOperationException("Catalog item with the same name already exists");
+
+            if (catalogItem.ParentId != null)
+            {
+                var parent= await _catalogItemRepository.GetByIdAsync(catalogItem.ParentId.Value);
+                catalogItem.ParentCatalog = parent;
+            }
 
             await _catalogItemRepository.AddAsync(catalogItem);
         }
 
         public async Task UpdateAsync(CatalogItem catalogItem)
         {
-            _catalogItemValidator.Validate(catalogItem);
 
             var existingCatalogItem = await _catalogItemRepository.GetByIdAsync(catalogItem.Id);
             if (existingCatalogItem == null)
@@ -52,8 +54,10 @@ namespace Domain.Services
                 throw new InvalidOperationException("Catalog item not found");
             }
 
+            _catalogItemValidator.Validate(catalogItem);
+
             existingCatalogItem.Name = catalogItem.Name;
-            existingCatalogItem.SubCatalogs = catalogItem.SubCatalogs;
+            existingCatalogItem.ParentId = catalogItem.ParentId;
 
             _catalogItemValidator.Validate(existingCatalogItem);
 

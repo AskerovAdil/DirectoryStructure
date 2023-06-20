@@ -12,6 +12,7 @@ namespace Domain.Services
     {
         public void Validate(CatalogItem catalogItem)
         {
+            
             if (catalogItem == null)
                 throw new ArgumentNullException(nameof(catalogItem));
 

@@ -1,6 +1,6 @@
 ﻿using DataAccess.Entities;
 
-namespace Domain.Abstract
+namespace Domain.Services
 {
     public interface ICatalogItemValidator
     {

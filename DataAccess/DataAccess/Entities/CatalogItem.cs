@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace DataAccess.Entities
 {
@@ -11,8 +12,9 @@ namespace DataAccess.Entities
 
         [Key]
         public int Id{ get; set; }
-        [Required]
         public string Name { get; set; }
+        public int? ParentId { get; set; }
+        public CatalogItem ParentCatalog { get; set; }
         public List<CatalogItem>? SubCatalogs { get; set; }
     }
 }

@@ -1,15 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <DirectoryStructure/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import DirectoryStructure from './components/DirectoryStructure.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    DirectoryStructure
   }
 }
 </script>

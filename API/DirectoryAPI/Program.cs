@@ -22,7 +22,7 @@ namespace DirectoryAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+   
             builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
             builder.Services.AddScoped<ICatalogItemRepository, CatalogItemRepository>();
             builder.Services.AddScoped<ICatalogItemService, CatalogItemService>();
